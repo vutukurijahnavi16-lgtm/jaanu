@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise 🎂</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #24102f, #08000d 70%);
+    color: white;
+    font-family: "Segoe UI", sans-serif;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Stars */
+.star {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px white;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .2; transform: scale(.6); }
+    to { opacity: 1; transform: scale(1.4); }
+}
+
+/* Pages */
+.page {
+    display: none;
+    height: 100vh;
+    padding: 25px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.page.active {
+    display: flex;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+    font-size: 42px;
+    color: #ffb6e6;
+    text-shadow: 0 0 15px #ff4fc3;
+}
+
+h2 {
+    font-size: 30px;
+    color: #ffd1ee;
+}
+
+p {
+    font-size: 20px;
+    line-height: 1.6;
+    max-width: 650px;
+}
+
+button {
+    margin-top: 25px;
+    padding: 13px 30px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #ff4fa3, #9b5cff);
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 0 20px #ff4fa3;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+/* Cake */
+.cake {
+    position: relative;
+    width: 180px;
+    height: 100px;
+    background: #ff8fc7;
+    border-radius: 15px 15px 25px 25px;
+    box-shadow: 0 0 35px #ff4fa3;
+    margin: 30px;
+}
+
+.cake:before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 0;
+    width: 180px;
+    height: 45px;
+    background: #ffd6ec;
+    border-radius: 50%;
+}
+
+.candle {
+    position: absolute;
+    top: -75px;
+    width: 12px;
+    height: 45px;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.candle:nth-child(1) { left: 50px; }
+.candle:nth-child(2) { left: 85px; }
+.candle:nth-child(3) { left: 120px; }
+
+.flame {
+    position: absolute;
+    top: -18px;
+    left: 2px;
+    width: 9px;
+    height: 16px;
+    background: #ffd23f;
+    border-radius: 50% 50% 50% 50%;
+    box-shadow: 0 0 15px #ff9d00;
+    animation: flame 0.7s infinite alternate;
+}
+
+@keyframes flame {
+    to { transform: scale(1.3); }
+}
+
+/* Hearts */
+.heart {
+    position: fixed;
+    bottom: -30px;
+    font-size: 25px;
+    animation: floatHeart 7s linear infinite;
+    opacity: .8;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0;
+    }
+    20% { opacity: 1; }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.message {
+    padding: 25px;
+    border-radius: 25px;
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,.15);
+    box-shadow: 0 0 30px rgba(255,79,163,.25);
+}
+</style>
+</head>
+
+<body>
+
+<!-- Stars -->
+<script>
+for(let i = 0; i < 80; i++) {
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 2 + "s";
+    document.body.appendChild(star);
+}
+</script>
+
+<!-- STEP 1 -->
+<section class="page active" id="page1">
+    <h1>✨ Hey You... ✨</h1>
+    <p>
+        I have a little surprise waiting for you... 💕
+    </p>
+    <button onclick="nextPage(2)">Open the Surprise 💌</button>
+</section>
+
+<!-- STEP 2 -->
+<section class="page" id="page2">
+    <h2>🌙 A Little Message For You 🌙</h2>
+
+    <div class="message">
+        <p>
+            Some people make ordinary days feel special...<br>
+            and you are one of those people. 💖
+        </p>
+    </div>
+
+    <button onclick="nextPage(3)">One More Step ✨</button>
+</section>
+
+<!-- STEP 3 -->
+<section class="page" id="page3">
+    <h1>🎂 Happy Birthday! 🎂</h1>
+
+    <div class="cake">
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+    </div>
+
+    <p>
+        May your birthday be filled with laughter,<br>
+        beautiful memories, happiness and lots of love. 💕
+    </p>
+
+    <button onclick="nextPage(4)">Your Final Surprise 💝</button>
+</section>
+
+<!-- STEP 4 -->
+<section class="page" id="page4">
+    <h1>💖 For My Dear Friend 💖</h1>
+
+    <div class="message">
+        <p>
+            No matter where life takes us,<br>
+            I hope you always keep smiling. 🌸<br><br>
+
+            Keep shining, keep dreaming,<br>
+            and keep being the wonderful person you are. ✨
+            <br><br>
+
+            <b>Happy Birthday once again! 🎂💗</b>
+        </p>
+    </div>
+
+    <h2>🌟 Have the most beautiful day! 🌟</h2>
+</section>
+
+<script>
+function nextPage(number) {
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    document.getElementById("page" + number)
+        .classList.add("active");
+}
+
+/* Floating hearts */
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = ["💖","💕","💗","💓","💘"][Math.floor(Math.random()*5)];
+
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.animationDuration = (5 + Math.random()*5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 10000);
+}, 700);
+</script>
+
+</body>
+</html>
